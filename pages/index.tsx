@@ -15,7 +15,7 @@ const HomePage: NextPage<Props> = ({ pokemons }) => {
   const [pokeSearch, setPokeSearch] = useState('');
 
   const handlePokeChange = ({ target: { value } }: any) => {
-    setPokeSearch(value)
+    setPokeSearch(value.toLowerCase())
   }
 
   return (
