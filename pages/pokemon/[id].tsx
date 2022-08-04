@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
-  const [isInFavorites, setIsInFavorites] = useState(localFavorites.existPokemonFav(pokemon.id))
+  const [isInFavorites, setIsInFavorites] = useState(localFavorites.existPokemonFav(pokemon.id));
 
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id);
@@ -21,7 +21,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
   return (
     <Layout title={pokemon.name} >
       <Grid.Container css={{ marginTop: '5px' }} gap={2}>
-        <Grid xs={12} sm={6}>
+        <Grid xs={12} sm={4} md={4}>
           <Card isHoverable css={{ padding: '30px' }}>
 
             <Card.Header css={{ display: 'flex', justifyContent: "space-between" }}>
@@ -46,11 +46,19 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
           </Card>
         </Grid>
 
-        <Grid xs={12} sm={6}>
+        <Grid xs={12} sm={4} md={4}>
           <Card>
 
             <Card.Body>
-              <Text size={30}>Sprites:</Text>
+              <Text
+                size={30}
+                css={{
+                  textGradient: "45deg, $yellow600 -20%, $red600 100%"
+                }}
+                weight={"bold"}
+              >
+                Sprites
+              </Text>
 
               <Container direction='row' display='flex'>
                 <Image
@@ -82,6 +90,34 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 
           </Card>
         </Grid>
+
+
+        <Grid xs={12} sm={4} md={4}>
+          <Card>
+
+            <Card.Body>
+              <Text
+                size={30}
+                css={{
+                  textGradient: "45deg, $purple600 -20%, $pink600 100%"
+                }}
+                weight={"bold"}
+              >
+                Habilidades
+              </Text>
+              <Container css={{ padding: 0 }}>
+                {
+                  pokemon.abilities.map(({ ability: { name } }) => {
+                    console.log(name)
+                    return <Text key={name} size={20} transform='capitalize' weight='semibold'>#{name}</Text>
+                  }
+                  )
+                }
+              </Container>
+
+            </Card.Body>
+          </Card>
+        </Grid>
       </Grid.Container>
     </Layout>
   )
@@ -94,7 +130,7 @@ export const getStaticPaths: GetStaticPaths = (ctx) => {
     paths: params150.map(id => ({
       params: { id }
     })),
-    fallback: false, 
+    fallback: false,
   }
 }
 
@@ -103,9 +139,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-        pokemon: await getPokemonInfo(id)
+      pokemon: await getPokemonInfo(id)
     }
-}
+  }
 }
 
 export default PokemonPage

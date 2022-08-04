@@ -7,6 +7,7 @@ export const getPokemonInfo = async (nameOrId: string | number) => {
     return {
         id: data.id,
         name: data.name,
-        sprites: data.sprites
+        sprites: data.sprites,
+        abilities: data.abilities
     }
 }

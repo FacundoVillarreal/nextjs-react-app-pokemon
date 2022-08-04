@@ -14,9 +14,9 @@ export const FavoritePokemons: FC<Props> = ({ listPokemons }) => {
                     <Grid
                         key={id}
                         xs={12}
-                        sm={4}
-                        md={2}
-                        xl={1}
+                        sm={3}
+                        md={3}
+                        xl={3}
                     >
                         <FavoriteCard key={id} id={id} />
                     </Grid>
